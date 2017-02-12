@@ -13,3 +13,20 @@ class BlockchainException extends Exception {
 		$this->message = $message;
 	}
 }
+
+class Blockchain {
+	private static $fee = 10000;
+	private $id, $pw, $address, $port;
+
+	public function __construct($id, $pw, $address = 'localhost', $port = 3000) {
+		if($port < 0 || $port > 65535 || !is_int($port)) {
+			throw new BlockchainException('Client error [constructor] - port must be between 0-65535!');
+		}
+
+		$this->address = $address;
+		$this->id = $id;
+		$this->pw = $pw;
+		$this->port = $port;
+
+	}
+}
