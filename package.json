@@ -1,0 +1,25 @@
+{
+  "name": "blockchainphp",
+  "version": "0.0.1",
+  "description": "Blockchain.info wallet object-oriented PHP framework",
+  "main": "dist/blockchain.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AtomisCZ/BlockchainPHP.git"
+  },
+  "keywords": [
+    "bitcoin",
+    "blockchain",
+    "php",
+    "framework"
+  ],
+  "author": "Filip Matiaska",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AtomisCZ/BlockchainPHP/issues"
+  },
+  "homepage": "https://github.com/AtomisCZ/BlockchainPHP#readme"
+}
