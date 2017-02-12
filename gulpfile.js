@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp = require('gulp');
 var phpMinify = require('@aquafadas/gulp-php-minify');
 
