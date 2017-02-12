@@ -1,4 +1,9 @@
 <?php
+/*
+BlockchainPHP - Blockchain.info wallet object-oriented PHP framework
+Copyright (C) 2017 Filip Matiaska
+https://github.com/AtomisCZ/BlockchainPHP/blob/master/LICENSE
+*/
 defined('IN_INDEX') or die('<span class="error">You cannot access this file directly!</span>');
 
 class BlockchainException extends Exception {
