@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/AtomisCZ/BlockchainPHP#readme",
   "devDependencies": {
+    "@aquafadas/gulp-php-minify": "^0.3.1",
     "gulp": "^3.9.1"
   }
 }
