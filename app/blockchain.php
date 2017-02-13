@@ -4,7 +4,12 @@ BlockchainPHP - Blockchain.info wallet object-oriented PHP framework
 Copyright (c) 2017 Filip Matiaska
 https://github.com/AtomisCZ/BlockchainPHP/blob/master/LICENSE
 */
-defined('IN_INDEX') or die('<span class="error">You cannot access this file directly!</span>');
+defined('IN_INDEX') or die('<span class="error">You cannot access this file directly!</span>'); //You can access this file only from another file, where is declared constant "IN_INDEX"
+
+
+
+//BEGIN OF EXCEPTION CLASS
+
 
 class BlockchainException extends Exception {
 	protected $message;
@@ -19,9 +24,22 @@ class BlockchainException extends Exception {
 	}
 }
 
+/*
+	This class is the handler when any error occurs in the framework
+*/
+
+
+//END OF EXCEPTION CLASS
+
+
+
+//BEGIN OF MAIN CLASS
+
 class Blockchain {
 	private static $fee = 10000;
 	private $id, $pw, $address, $port;
+
+	//$fee is defaltly 10000, you can change it in constructor when creating instance
 
 	public function __construct($id, $pw, $address = 'localhost', $port = 3000) {
 		if($port < 0 || $port > 65535 || !is_int($port)) {
@@ -34,6 +52,14 @@ class Blockchain {
 		$this->port = $port;
 
 	}
+
+	/*
+		Constructor has - 2 required parameters ($id, $pw) which represents id and password to your blockchain.info wallet
+						- 2 optional parameters ($address, $port) which represents IP add., port to your blockchain-wallet-service 
+
+		NOTE:
+		OPTIONAL PARAMETERS ARE DEFAULTLY SET TO ($address = 'localhost';$port = 3000)
+	*/
 
 	public function getID() {
 		return $this->id;
@@ -89,3 +115,6 @@ class Blockchain {
 
 	}
 }
+
+
+//END OF MAIN CLASS
