@@ -7,6 +7,6 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Mauris metus. Etiam eg
 
 ### Copyright information
 
-BlockchainPHP - Blockchain.info wallet object-oriented PHP framework
-Copyright (c) 2017 Filip Matiaska
-[LICENSE FILE] (https://github.com/AtomisCZ/BlockchainPHP/blob/master/LICENSE)
+- BlockchainPHP - Blockchain.info wallet object-oriented PHP framework
+- Copyright (c) 2017 Filip Matiaska
+- [LICENSE FILE] (https://github.com/AtomisCZ/BlockchainPHP/blob/master/LICENSE)
