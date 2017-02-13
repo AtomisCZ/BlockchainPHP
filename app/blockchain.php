@@ -61,4 +61,31 @@ class Blockchain {
 		$parse = json_decode(file_get_contents("http://$this->address:$this->port/merchant/$this->id/address_balance?password=$this->pw&address=$address"));
 		return $parse->balance;
 	}
+
+	public function newAddress($label) {
+		$parse = json_decode(file_get_contents("http://$this->address:$this->port/merchant/$this->id/new_address?password=$this->pw&label=$label"));
+		return $parse->address;
+	}
+
+	public function payment($from, $to, $amount, $feeFromAmount = false) {
+		if(!is_int($amount) || !is_bool($feeFromAmount) || $amount <= 0) {
+			throw new BlockchainException('Client error [payment] - wrong declaration of parameters!');
+		}
+
+		$balance = $this->getAddressBalance($from);
+		$fee = Blockchain::$fee;
+
+		$sendingAmount = $feeFromAmount ? $amount-$fee : $amount;
+
+		if((!$feeFromAmount && $sendingAmount+$fee > $balance)||($feeFromAmount && $sendingAmount > $balance)) {
+			throw new BlockchainException('Client error [payment] - Insufficient balance!');
+		}
+
+
+		$parse = json_decode(file_get_contents("http://$this->address:$this->port/merchant/$this->id/payment?password=$this->pw&to=$to&amount=$sendingAmount&from=$from&fee=$fee"));
+
+		return $parse->message;
+
+
+	}
 }
