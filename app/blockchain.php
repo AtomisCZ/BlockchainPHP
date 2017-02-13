@@ -34,4 +34,31 @@ class Blockchain {
 		$this->port = $port;
 
 	}
+
+	public function getID() {
+		return $this->id;
+	}
+
+	public function getAddress() {
+		return $this->address;
+	}
+
+
+	public function getPort() {
+		return $this->port;
+	}
+
+	public static function setFee($fee) {
+		Blockchain::$fee = $fee;
+	}
+
+	public static function getFee() {
+		return Blockchain::$fee;
+	}
+
+
+	public function getAddressBalance($address) {
+		$parse = json_decode(file_get_contents("http://$this->address:$this->port/merchant/$this->id/address_balance?password=$this->pw&address=$address"));
+		return $parse->balance;
+	}
 }
