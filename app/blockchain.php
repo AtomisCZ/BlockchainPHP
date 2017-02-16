@@ -37,7 +37,7 @@ class BlockchainException extends Exception {
 
 class Blockchain {
 	private static $fee = 10000;
-	private $id, $pw, $address, $port;
+	private $id, $pw, $address, $port, $ch;
 
 	//$fee is defaltly 10000, you can change it in constructor when creating instance
 
@@ -50,6 +50,9 @@ class Blockchain {
 		$this->id = $id;
 		$this->pw = $pw;
 		$this->port = $port;
+		$this->ch = curl_init();
+
+		curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
 
 	}
 
@@ -84,13 +87,18 @@ class Blockchain {
 
 
 	public function getAddressBalance($address) {
-		$parse = json_decode(file_get_contents("http://$this->address:$this->port/merchant/$this->id/address_balance?password=$this->pw&address=$address"));
-		return $parse->balance;
+		curl_setopt($this->ch, CURLOPT_URL, "http://$this->address:$this->port/merchant/$this->id/address_balance?password=$this->pw&address=$address");
+
+		$result = json_decode(curl_exec($this->ch));
+		return $result->balance;
 	}
 
 	public function newAddress($label) {
-		$parse = json_decode(file_get_contents("http://$this->address:$this->port/merchant/$this->id/new_address?password=$this->pw&label=$label"));
-		return $parse->address;
+		curl_setopt($this->ch, CURLOPT_URL, "http://$this->address:$this->port/merchant/$this->id/new_address?password=$this->pw&label=$label");
+
+		$result = json_decode(curl_exec($this->ch));
+
+		return $result->address;
 	}
 
 	public function payment($from, $to, $amount, $feeFromAmount = false) {
@@ -108,9 +116,11 @@ class Blockchain {
 		}
 
 
-		$parse = json_decode(file_get_contents("http://$this->address:$this->port/merchant/$this->id/payment?password=$this->pw&to=$to&amount=$sendingAmount&from=$from&fee=$fee"));
+		curl_setopt($this->ch, CURLOPT_URL, "http://$this->address:$this->port/merchant/$this->id/payment?password=$this->pw&to=$to&amount=$sendingAmount&from=$from&fee=$fee");
 
-		return $parse->message;
+		$result = json_decode(curl_exec($this->ch));
+
+		return $result->message;
 
 
 	}
